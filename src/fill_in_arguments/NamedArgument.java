@@ -14,13 +14,14 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface NamedArgument
 {
-    // TODO: pretty sure I can remove either this or the converter method
-    public int neededParameters() default 1;
-
-    // TODO: remove or support having different flag names
-    public String shortName() default "";
+    // Short name is required because no default name would make sense.
+    public String shortName();
     
     public String description() default "";
+
+    public boolean isRequired() default false;
+
+    public String[] mutuallyExclusive() default {};
     
     public Class<? extends Converter> converter() default DefaultConverter.class;
 }

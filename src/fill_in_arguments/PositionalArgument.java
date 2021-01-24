@@ -15,10 +15,12 @@ import java.lang.annotation.Target;
 @Retention(RetentionPolicy.RUNTIME)
 public @interface PositionalArgument
 {
-    public String description() default "Used for something!";
+    public String description() default "";
     
     // allows you to define an ordering on positional arguments without changing their location in source code
     public int order() default 0;
+
+    public boolean isRequired() default false;
     
     // converts the input that comes in as a String to the variable
     public Class<? extends Converter> converter() default DefaultConverter.class;

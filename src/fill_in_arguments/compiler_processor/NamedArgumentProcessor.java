@@ -5,10 +5,7 @@ import fill_in_arguments.converters.DefaultConverter;
 import java.util.Arrays;
 import java.util.HashSet;
 import java.util.Set;
-import javax.annotation.processing.AbstractProcessor;
-import javax.annotation.processing.Messager;
-import javax.annotation.processing.RoundEnvironment;
-import javax.annotation.processing.SupportedAnnotationTypes;
+import javax.annotation.processing.*;
 import javax.lang.model.SourceVersion;
 import javax.lang.model.element.Element;
 import javax.lang.model.element.ExecutableElement;
@@ -21,18 +18,17 @@ import javax.lang.model.util.Types;
 import javax.tools.Diagnostic;
 
 /**
- * @author Hayden Fields
- * populate_class_from_args.NamedArgumentProcessor
  */
-@SupportedAnnotationTypes("NamedArgument")
+@SupportedAnnotationTypes("fill_in_arguments.NamedArgument")
+@SupportedSourceVersion(SourceVersion.RELEASE_8)
 public class NamedArgumentProcessor extends AbstractProcessor
 {
     @Override
     public boolean process (Set<? extends TypeElement> annotations, RoundEnvironment env)
     {
         Types types = processingEnv.getTypeUtils();
-        
         Messager messager = processingEnv.getMessager();
+
          for (TypeElement typeElement : annotations) {
             for (Element element : env.getElementsAnnotatedWith(typeElement)) {
                 NamedArgument annotation = element.getAnnotation(NamedArgument.class);
